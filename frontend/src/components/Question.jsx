@@ -1,7 +1,7 @@
 import sendIcon from '../assets/images/sendIcon.png';
 import '../index.css';
 import {useState} from 'react';
-import toast from 'react-toastify';
+import {toast} from 'react-toastify';
 import axios from 'axios';
 export default  function Question(){
   const [question, setQuestion] = useState('');
