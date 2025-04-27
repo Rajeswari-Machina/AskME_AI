@@ -22,3 +22,4 @@ env/
 # Flask specific
 instance/
 *.pid.env
+.env
