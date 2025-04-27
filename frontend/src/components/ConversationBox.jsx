@@ -1,14 +1,58 @@
 import miniaiLogo from '../assets/images/miniaiLogo.png';
-// import user from '../assets/images/user.png';
+import { useEffect, useState } from 'react';
+import user from '../assets/images/user.png';
 import '../index.css';
+
 export default function ConversationBox() {
+  const [conversations, setConversations] = useState(() => JSON.parse(localStorage.getItem('responses')) || []);
+
+  useEffect(() => {
+    const handleStorageChange = (event) => {
+      if (event.key === 'responses') {
+        setConversations(prevConversations => {
+          const updatedConversations = JSON.parse(event.newValue) || [];
+          if (JSON.stringify(prevConversations) !== JSON.stringify(updatedConversations)) {
+            return updatedConversations;
+          }
+          return prevConversations;
+        });
+      }
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+    };
+  }, []);
+
+  useEffect(() => {
+    const conversationContainer = document.getElementById('conversation-container');
+    if (conversationContainer) {
+      conversationContainer.scrollTop = conversationContainer.scrollHeight;
+    }
+  }, [conversations]);
+
   return (
-    <div className="flex flex-row bg-white items-start justify-center p-4">
-      <img src={miniaiLogo} alt="Logo" className="h-auto w-auto mr-4" />
-      <div className="text-lg flex flex-wrap text-gray-800  leading-relaxed">
-        Our own Large Language Model (LLM) is a type of AI that can learn from data. We have trained it on 7 billion parameters, which makes it better than other LLMs. 
-        We are featured on aiplanet.com and work with leading enterprises to help them use AI securely and privately. We have a Generative AI Stack that helps reduce hallucinations in LLMs and allows enterprises to use AI in their applications.
-      </div>
+    <div id="conversation-container" className="overflow-y-auto h-full">
+      {
+        conversations?.map((conversation, index) => (
+          <div key={index} className="w-full">
+            <div className="flex flex-row bg-white items-start justify-start mb-4 mt-4 p-4">
+              <img src={user} alt="User" className="h-auto w-auto mr-4" />
+              <div className="text-lg flex flex-wrap text-gray-800 leading-relaxed">
+                {conversation.query}
+              </div>
+            </div>
+            <div className="flex flex-row bg-white items-start justify-start p-4">
+              <img src={miniaiLogo} alt="Logo" className="h-auto w-auto mr-4" />
+              <div className="text-lg flex flex-wrap text-gray-800 leading-relaxed">
+                {conversation.result}
+              </div>
+            </div>
+          </div>
+        ))
+      }
     </div>
   );
 }
