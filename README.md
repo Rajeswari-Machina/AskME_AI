@@ -144,12 +144,12 @@ Frontend will run at [http://localhost:5173](http://localhost:5173).
 
 ##  Future Enhancements
 
-- ✅ User Authentication and Authorization
-- ✅ Support Multi-file Uploads
-- ✅ Stream processing for very large PDFs
-- ✅ Persistent FAISS storage (Disk-based VectorDB)
-- ✅ Chatbot-like dynamic conversations (multi-turn)
-- ✅ Admin dashboard for managing uploads and vector stores
+-  User Authentication and Authorization
+-  Support Multi-file Uploads
+-  Stream processing for very large PDFs
+-  Persistent FAISS storage (Disk-based VectorDB)
+-  Chatbot-like dynamic conversations (multi-turn)
+- Admin dashboard for managing uploads and vector stores
 
 ---
 
@@ -157,7 +157,7 @@ Frontend will run at [http://localhost:5173](http://localhost:5173).
 # 💬 Quick Preview
 
 > 1. Upload a PDF 📄  
-> 2. AI processes and understands it 🤖  
-> 3. Ask questions and get answers instantly! 🧠
+> 2. AI processes and understands it 
+> 3. Ask questions and get answers instantly! 
 
 ---
