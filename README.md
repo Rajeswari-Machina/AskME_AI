@@ -17,6 +17,7 @@
 
 AskME_AI is a full-stack application that allows users to upload PDF documents, automatically store them on AWS S3, process and embed the content using state-of-the-art language models, and retrieve intelligent answers based on user questions.
 
+preview : https://youtu.be/QdbvY7p43e4
 ---
 
 ##  Architecture
