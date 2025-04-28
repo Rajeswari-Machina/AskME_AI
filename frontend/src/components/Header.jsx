@@ -11,15 +11,9 @@ export default function Header(){
 
   const handleFileChange = async(e) => {
     setFile(e.target.files[0]);
-    console.log(file);
   };
 
   const handleUpload = async () => {
-    if (!file) {
-      toast.error('Please select a file first!');
-      return;
-    }
-
     if (!file.name.toLowerCase().endsWith('.pdf')) {
       toast.error('Only PDF files are allowed!');
       return;
@@ -29,7 +23,7 @@ export default function Header(){
     formData.append('file', file);
 
     try {
-      const response = await axios.post('https://askme-ai-o3jk.onrender.com/upload_pdf/', formData, {
+      const response = await axios.post('http://127.0.0.1:8000/upload_pdf/', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -58,7 +52,13 @@ export default function Header(){
       <div className="flex ml-2 space-x-4">
       
       <button 
-      onClick={handleUpload}
+      onClick={async() => {
+      if (!file) {
+        toast.error('Please select a file first!');
+        return;
+      }
+      await  handleUpload();
+      }}
       className="bg-white font-bold flex items-center text-gray-800 px-2 py-2 sm:px-8 sm:py-2 border border-black-2px rounded-lg hover:cursor-pointer hover:border-gray-400"
       >
       <img src={upload} alt="+" className="h-4 w-4 inline" />

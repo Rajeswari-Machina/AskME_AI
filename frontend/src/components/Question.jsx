@@ -15,16 +15,16 @@ export default  function Question(){
     if (question.trim() === '') {
       return;
     }
-
-    try {
-      const response = await axios.post('http://127.0.0.1:8000/ask/', null, {
-        params: { question: question }, 
-        headers: {
-            'Content-Type': 'application/json',
-        },
+    const formData = new FormData();
+    formData.append('question', question);
+    try{
+    const response = await axios.post('https://askme-ai-o3jk.onrender.com/ask/', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
     });
       console.log(response);
-      saveResponseToLocalStorage(response.result);
+      saveResponseToLocalStorage(response.data.answer);
         
     } catch (error) {
       console.error(error);
