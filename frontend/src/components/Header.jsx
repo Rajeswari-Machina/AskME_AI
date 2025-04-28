@@ -23,7 +23,7 @@ export default function Header(){
     formData.append('file', file);
 
     try {
-      const response = await axios.post('http://127.0.0.1:8000/upload_pdf/', formData, {
+      const response = await axios.post('https://askme-ai-o3jk.onrender.com/upload_pdf/', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
